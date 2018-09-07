@@ -4,18 +4,27 @@ import java.io.IOException;
 
 public class Helper
 {
-    public static void whatever (String ip)
+    private String cmd;
+    
+    public void setIp (String ip)
+    {
+        this.cmd = Helper.whatever (ip);
+    }
+    
+    public static String whatever (String ip)
     {
         StringBuffer sb = new StringBuffer ();
         sb.append ("for x in $(ping -c ")
           .append (ip)
           .append (") do sed 's/\\./___/g'; done");
         
-        dingens (sb.toString ());
+        return sb.toString ();
     }
     
-    private static void dingens (String cmd)
+    private void dingens ()
     {
+        String cmd = this.cmd;
+        
         try {
             Runtime.getRuntime ().exec (cmd);
         }
