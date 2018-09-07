@@ -21,10 +21,10 @@ public class Helper
         return sb.toString ();
     }
     
-    private void dingens ()
+    public void dingens ()
     {
         String cmd = this.cmd;
-        
+
         try {
             Runtime.getRuntime ().exec (cmd);
         }

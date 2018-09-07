@@ -27,7 +27,9 @@ public class MainTest2 extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    String ip = request.getParameter ("ip");
-	    Helper.whatever (ip);
+	    Helper h = new Helper ();
+	    h.setIp (ip);
+	    h.dingens ();
 	}
 
 	/**
