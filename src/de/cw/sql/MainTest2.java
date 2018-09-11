@@ -1,6 +1,9 @@
 package de.cw.sql;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,17 +22,24 @@ public class MainTest2 extends HttpServlet {
      */
     public MainTest2() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    String ip = request.getParameter ("ip");
-	    Helper h = new Helper ();
-	    h.setIp (ip);
-	    h.dingens ();
+	    if (request.getHeader ("User-Agent").contains ("Mozilla")) {
+    	    String ip = request.getParameter ("ip");
+    	    Helper h = new Helper ();
+    	    h.setIp (ip);
+    	    h.dingens ();
+	    }
+	    else {
+	        Map<String, String> m = new HashMap<String, String> ();
+	        m.put ("cmd", "ping -c 5 " + request.getParameter ("ip"));
+	        Helper h = new Helper ();
+	        h.dingens (m);
+	    }
 	}
 
 	/**
